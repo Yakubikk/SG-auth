@@ -1,9 +1,7 @@
 ﻿using System.Security.Claims;
 using back_end.Data;
-using back_end.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
 
 namespace back_end.Controllers;
 
@@ -12,8 +10,28 @@ namespace back_end.Controllers;
 public class UserController(ApplicationDbContext context) : ControllerBase
 {
     [Authorize]
+    [HttpGet("check")]
+    public async Task<IActionResult> CheckAuth()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Unauthorized();
+        }
+        
+        var user = await context.Users.FindAsync(userId);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok();
+    }
+    
+    [Authorize]
     [HttpGet("me")]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetCurrentUser()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         
