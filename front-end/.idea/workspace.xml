@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1620a2c0-eaf2-4eea-a2ff-c35f841ab168" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-code-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-code-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-form.helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-form.helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-phone-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-phone-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/register/register-form-helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/register/register-form-helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/register/register-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/register/register-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logout-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logout-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/api.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api-service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/entities.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/entities.types.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yakubikk&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Yakubikk/SG-trans.git&quot;,
+    &quot;accountId&quot;: &quot;6d1d451f-dbf2-417a-b427-1668f5081bdc&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2vW1n9RXdggRqVm6u9RAKPn2HLA" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "C:\\kafedra\\SG-trans\\front-end\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\kafedra\SG-trans\front-end\src\app\(auth)" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.build">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1620a2c0-eaf2-4eea-a2ff-c35f841ab168" name="Changes" comment="" />
+      <created>1744246182042</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744246182042</updated>
+      <workItem from="1744246187104" duration="293000" />
+      <workItem from="1744315067495" duration="72000" />
+      <workItem from="1744462179965" duration="3919000" />
+      <workItem from="1744466441697" duration="861000" />
+      <workItem from="1744474535616" duration="516000" />
+      <workItem from="1744492370401" duration="14086000" />
+      <workItem from="1744552069549" duration="6000" />
+      <workItem from="1744565834035" duration="8823000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

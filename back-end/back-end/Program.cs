@@ -42,16 +42,6 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredUniqueChars = 0;
 });
 
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.ConfigureApplicationCookie(options =>
-    {
-        options.Cookie.SameSite = SameSiteMode.Lax;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.None;
-        options.Cookie.HttpOnly = false;
-    });
-}
-
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
