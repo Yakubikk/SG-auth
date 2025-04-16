@@ -22,15 +22,12 @@ export interface Department {
 export interface User {
     id: string;
     userName: string;
-    role: UserRole;
-    fullName: string;
     email: string;
-    phone?: string;
-    department: Department;
-    isActive: boolean;
-    lastLogin: string;
-    createdAt: string;
-    updatedAt: string;
+    phoneNumber?: string;
+    emailConfirmed: boolean;
+    phoneNumberConfirmed?: boolean;
+    twoFactorEnabled: boolean;
+    lockoutEnd?: Date;
 }
 
 export interface SystemAction {
@@ -63,7 +60,10 @@ export interface RegisterPayload {
 }
 
 export interface RegisterResponse {
-    id: string;
+    type: string;
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
 }
 
 export interface LoginPayload {
@@ -77,8 +77,9 @@ export interface LoginPhonePayload {
 }
 
 export interface LoginResponse {
-    id?: string;
-    token?: string;
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
 }
 
 export interface LoginPhoneResponse {

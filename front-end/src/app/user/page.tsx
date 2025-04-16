@@ -1,4 +1,7 @@
+'use client'
+
 import { LogoutButton } from '@/components/logout-button'
+import {GetInfoButton} from "@/components/get-info-button";
 
 export default function UserDashboard() {
   return (
@@ -7,6 +10,7 @@ export default function UserDashboard() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-2xl font-bold">User Dashboard</h1>
           <LogoutButton />
+          <GetInfoButton />
         </div>
         
         <div className="bg-white p-6 rounded shadow-md">

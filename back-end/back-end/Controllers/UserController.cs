@@ -2,6 +2,7 @@
 using back_end.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace back_end.Controllers;
 
@@ -11,41 +12,16 @@ public class UserController(ApplicationDbContext context) : ControllerBase
 {
     [Authorize]
     [HttpGet("check")]
-    public async Task<IActionResult> CheckAuth()
+    public IActionResult CheckAuth()
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        
-        if (string.IsNullOrEmpty(userId))
-        {
-            return Unauthorized();
-        }
-        
-        var user = await context.Users.FindAsync(userId);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
         return Ok();
     }
     
     [Authorize]
     [HttpGet("me")]
-    public async Task<IActionResult> GetCurrentUser()
+    public IActionResult GetCurrentUser()
     {
-        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         
-        if (string.IsNullOrEmpty(userId))
-        {
-            return Unauthorized();
-        }
-        
-        var user = await context.Users.FindAsync(userId);
-        if (user == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(user);
+        return Ok();
     }
 }
