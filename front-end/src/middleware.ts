@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import {ApiService} from "@/services/api-service";
 
 export async function middleware(request: NextRequest) {
     const token = request.cookies.get('accessToken')?.value;
@@ -16,7 +17,14 @@ export async function middleware(request: NextRequest) {
     }
 
     if (!token) {
-        return NextResponse.redirect(new URL('/login', request.url));
+        try {
+            await ApiService.checkAuth();
+            return NextResponse.next();
+        } catch (error) {
+            console.error(error);
+            return NextResponse.redirect(new URL('/login', request.url));
+        }
+
     }
 }
 

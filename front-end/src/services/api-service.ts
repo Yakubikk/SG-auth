@@ -25,36 +25,29 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-// api.interceptors.response.use(
-//     (response) => response,
-//     async (error) => {
-//         const originalRequest = error.config;
-//         if (error.response.status === 401 && !originalRequest._retry) {
-//             originalRequest._retry = true;
-//
-//             try {
-//                 const refreshToken = getCookie('refreshToken');
-//                 const response = await axios.post('http://localhost:5189/refresh', { refreshToken });
-//
-//                 setCookie('accessToken', response.data.accessToken, {
-//                     maxAge: response.data.expiresIn,
-//                     path: '/',
-//                     secure: true,
-//                     sameSite: 'strict',
-//                 });
-//                 originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
-//                 return api(originalRequest);
-//             } catch (refreshError) {
-//                 console.error("Refresh token failed:", refreshError);
-//                 document.cookie = 'accessToken=; path=/; max-age=0';
-//                 document.cookie = 'refreshToken=; path=/; max-age=0';
-//
-//                 window.location.href = '/login';
-//             }
-//         }
-//         return Promise.reject(error);
-//     }
-// );
+api.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+        const originalRequest = error.config;
+        if (error.response.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+
+            try {
+                const refreshToken = getCookie('refreshToken');
+                const response = await axios.post('http://localhost:5189/refresh', { refreshToken: refreshToken });
+                await setTokens(response.data.accessToken, response.data.refreshToken, response.data.expiresIn);
+
+                originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
+                return api(originalRequest);
+            } catch (refreshError) {
+                console.error("Refresh token failed:", refreshError);
+                await deleteCookie('accessToken');
+                await deleteCookie('refreshToken');
+            }
+        }
+        return Promise.reject(error);
+    }
+);
 
 const setTokens = async (
     accessToken: string,
@@ -85,7 +78,6 @@ const ApiService = {
     postRegister: async (
         formData: RegisterPayload
     ): Promise<void> => {
-        console.log(formData);
         return getResponseData<void>(
             await authApi.post('/register', {
                 email: formData.email,
@@ -108,11 +100,45 @@ const ApiService = {
         await deleteCookie('refreshToken');
         window.location.href = '/login';
     },
+    checkAuth: async (): Promise<void> => {
+        return getResponseData<void>(
+            await api.get('/user/check')
+        );
+    },
     getUser: async (): Promise<User | undefined> => {
         return getResponseData<User>(
             await api.get('/user/me')
         );
     },
+    getAllUsers: async (): Promise<User[] | undefined> => {
+        return getResponseData<User[]>(
+            await api.get('/user/all')
+        );
+    },
+    getUserById: async (
+        id: string
+    ): Promise<User | undefined> => {
+        return getResponseData<User>(
+            await api.get(`/user/${id}`)
+        );
+    },
+    updateUser: async (
+        id: string,
+        data: {
+            username: string;
+            email: string;
+            phoneNumber: string;
+        },
+    ): Promise<User | undefined> => {
+        return getResponseData<User>(
+            await api.put(`/user/${id}`, {
+                username: data.username,
+                email: data.email,
+                phoneNumber: data.phoneNumber
+            })
+        );
+    }
 };
 
-export { ApiService, api, setTokens };
+export { ApiService, setTokens };
+export default ApiService;

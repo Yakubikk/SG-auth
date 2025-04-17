@@ -5,39 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1620a2c0-eaf2-4eea-a2ff-c35f841ab168" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../back-end-9/.idea/.idea.back-end-9/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/.idea/.idea.back-end-9/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/.idea/.idea.back-end-9/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/.idea/.idea.back-end-9/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Controllers/UserController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Controllers/WeatherForecastController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Data/ApplicationDbContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/WeatherForecast.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/back-end-9.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/back-end-9.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/back-end-9.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/get-info-button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/.idea/.idea.back-end/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/.idea/.idea.back-end/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/back-end/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/back-end/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/back-end/Migrations/20250413142425_Initial.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/back-end/Migrations/20250413142425_Initial.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/back-end/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/back-end/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/back-end/back-end.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/back-end/back-end.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../back-end-9/Api/UpdateRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/blocks/admin/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/blocks/admin/update-user-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/blocks/main-page/go-to-admin-page-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/blocks/main-page/go-to-user-page-button.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/blocks/user/user-title.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/stores/useAuth.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end-9/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/user/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-form.helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-form.helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/logout-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logout-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/get-info-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/get-info-button.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/api-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api-service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/entities.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/entities.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -79,28 +66,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/kafedra/SG-auth/front-end/src/components&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\kafedra\\SG-auth\\front-end\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/kafedra/SG-auth/front-end/src/components/blocks/main-page",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.dev.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "C:\\kafedra\\SG-auth\\front-end\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\kafedra\SG-auth\front-end\src\components\blocks\main-page" />
       <recent name="C:\kafedra\SG-auth\front-end\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -164,10 +152,16 @@
       <workItem from="1744622976585" duration="12000" />
       <workItem from="1744825249698" duration="20000" />
       <workItem from="1744829294487" duration="8182000" />
+      <workItem from="1744873715846" duration="2471000" />
+      <workItem from="1744909327033" duration="2428000" />
+      <workItem from="1744917351051" duration="6564000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.config" />
   </component>
 </project>

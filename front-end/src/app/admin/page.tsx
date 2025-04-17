@@ -1,5 +1,6 @@
 import { LogoutButton } from '@/components/logout-button'
 import Link from 'next/link'
+import {UpdateUserForm} from "@/components";
 
 export default function AdminDashboard() {
     return (
@@ -23,9 +24,7 @@ export default function AdminDashboard() {
 
                     <div>
                         <h2 className="text-xl font-semibold mb-4">Admin Tools</h2>
-                        <div className="space-y-2">
-                            <p className="text-gray-600">Other admin functionalities will be here...</p>
-                        </div>
+                        <UpdateUserForm />
                     </div>
                 </div>
             </div>

@@ -9,7 +9,8 @@ import type {LoginPayload} from '@/types';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import {onSubmitForm} from "@/components/blocks/login/login-form.helper";
-import {setTokens} from "@/services/api-service";
+import {ApiService, setTokens} from "@/services/api-service";
+import {useAuthStore} from '@/stores/useAuth';
 
 export interface LoginFormValues {
     email: string;
@@ -19,6 +20,7 @@ export interface LoginFormValues {
 
 const LoginForm: React.FC = () => {
     const router = useRouter();
+    const {setUser} = useAuthStore();
 
     const methods = useForm<LoginFormValues>({
         criteriaMode: 'all',
@@ -39,8 +41,12 @@ const LoginForm: React.FC = () => {
         try {
             const response = await onSubmitForm(values);
             if (response) {
-                console.log(response);
                 await setTokens(response.accessToken, response.refreshToken, response.expiresIn);
+                const userResponse = await ApiService.getUser();
+                if (userResponse) {
+                    console.log(userResponse);
+                    setUser(userResponse);
+                }
             }
             toast.success('Вход выполнен успешно!');
             router.push('/');
