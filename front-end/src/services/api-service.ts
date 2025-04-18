@@ -10,11 +10,11 @@ import type {
 import {deleteCookie, getCookie, setCookie} from 'cookies-next';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5189',
+    baseURL: 'http://localhost:5000',
 });
 
 const authApi = axios.create({
-    baseURL: 'http://localhost:5189',
+    baseURL: 'http://localhost:5000',
 });
 
 api.interceptors.request.use((config) => {
@@ -34,7 +34,7 @@ api.interceptors.response.use(
 
             try {
                 const refreshToken = getCookie('refreshToken');
-                const response = await axios.post('http://localhost:5189/refresh', { refreshToken: refreshToken });
+                const response = await axios.post('http://localhost:5000/refresh', { refreshToken: refreshToken });
                 await setTokens(response.data.accessToken, response.data.refreshToken, response.data.expiresIn);
 
                 originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;
