@@ -10,7 +10,7 @@ import type {
 import {deleteCookie, getCookie, setCookie} from 'cookies-next';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'http://kaftp.online:5000',
 });
 
 const authApi = axios.create({
@@ -34,7 +34,7 @@ api.interceptors.response.use(
 
             try {
                 const refreshToken = getCookie('refreshToken');
-                const response = await axios.post('http://localhost:5000/refresh', { refreshToken: refreshToken });
+                const response = await axios.post('http://kaftp.online:5000/refresh', { refreshToken: refreshToken });
                 await setTokens(response.data.accessToken, response.data.refreshToken, response.data.expiresIn);
 
                 originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`;

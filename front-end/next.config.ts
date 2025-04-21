@@ -3,8 +3,13 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
     allowedDevOrigins: [
-        "26.247.41.160"
+        "http://kaftp.online"
     ],
+    experimental: {
+      serverActions: {
+        allowedOrigins: ['kaftp.online', 'localhost:3000'], 
+      },
+    },
 };
 
 export default nextConfig;

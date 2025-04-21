@@ -19,10 +19,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactClient", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://26.247.41.160:3000")
+        policy.WithOrigins("http://kaftp.online", "http://localhost:3000")
             .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
+            .AllowAnyHeader();
     });
 });
 
