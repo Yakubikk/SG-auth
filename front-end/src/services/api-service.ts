@@ -5,7 +5,9 @@ import axios, {
 import type {
     RegisterPayload,
     LoginPayload,
-    LoginResponse, User,
+    LoginResponse,
+    User,
+    FileModel,
 } from '@/types';
 import {deleteCookie, getCookie, setCookie} from 'cookies-next';
 
@@ -17,8 +19,8 @@ const authApi = axios.create({
     baseURL: 'http://localhost:5000',
 });
 
-api.interceptors.request.use((config) => {
-    const token = getCookie('accessToken');
+api.interceptors.request.use(async (config) => {
+    const token = await getCookie('accessToken');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -33,7 +35,7 @@ api.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const refreshToken = getCookie('refreshToken');
+                const refreshToken = await getCookie('refreshToken');
                 const response = await axios.post('http://kaftp.online:5000/refresh', { refreshToken: refreshToken });
                 await setTokens(response.data.accessToken, response.data.refreshToken, response.data.expiresIn);
 
@@ -131,12 +133,53 @@ const ApiService = {
         },
     ): Promise<User | undefined> => {
         return getResponseData<User>(
-            await api.put(`/user/${id}`, {
-                username: data.username,
-                email: data.email,
-                phoneNumber: data.phoneNumber
+            await api.put(`/user/${id}`, data)
+        );
+    },
+
+    // Files API
+    getAllFiles: async (): Promise<FileModel[] | undefined> => {
+        return getResponseData<FileModel[]>(
+            await api.get('/Files')
+        );
+    },
+
+    getFileById: async (id: string): Promise<FileModel | undefined> => {
+        return getResponseData<FileModel>(
+            await api.get(`/Files/${id}`)
+        );
+    },
+
+    getUserFiles: async (userId: string): Promise<FileModel[] | undefined> => {
+        return getResponseData<FileModel[]>(
+            await api.get(`/Files/User/${userId}`)
+        );
+    },
+
+    uploadFile: async (userId: string, file: File): Promise<FileModel | undefined> => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return getResponseData<FileModel>(
+            await api.post(`/Files/User/${userId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
         );
+    },
+
+    deleteFile: async (id: string): Promise<void> => {
+        return getResponseData<void>(
+            await api.delete(`/Files/${id}`)
+        );
+    },
+
+    downloadFile: async (fileId: string): Promise<Blob> => {
+        const response = await api.get(`/Files/${fileId}/download`, {
+            responseType: 'blob'
+        });
+        return response.data;
     }
 };
 

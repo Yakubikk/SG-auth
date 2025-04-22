@@ -1,6 +1,3 @@
-@back_end_9_HostAddress = http://localhost:5189
-
-GET {{back_end_9_HostAddress}}/weatherforecast/
-Accept: application/json
+@back_end_9_HostAddress = http://localhost:5000
 
 ###

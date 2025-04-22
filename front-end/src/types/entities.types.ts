@@ -24,10 +24,7 @@ export interface User {
     userName: string;
     email: string;
     phoneNumber?: string;
-    emailConfirmed: boolean;
-    phoneNumberConfirmed?: boolean;
-    twoFactorEnabled: boolean;
-    lockoutEnd?: Date;
+    roles?: string[];
 }
 
 export interface SystemAction {
@@ -59,13 +56,6 @@ export interface RegisterPayload {
     phone?: string;
 }
 
-export interface RegisterResponse {
-    type: string;
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-}
-
 export interface LoginPayload {
     email: string;
     password: string;
@@ -93,4 +83,14 @@ export interface LoginCodePayload {
 
 export interface LoginCodeResponse {
     id: string;
+}
+
+export interface FileModel {
+    fileId: string;
+    fileName: string;
+    contentType: string;
+    filePath: string;
+    size: number;
+    isPublic: boolean;
+    // Add any other properties you need
 }

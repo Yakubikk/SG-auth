@@ -1,4 +1,5 @@
 using back_end_9.Data;
+using back_end_9.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,8 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -25,6 +26,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthorization();
+
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -39,6 +42,6 @@ app.UseAuthorization();
 app.UseCors("ReactClient");
 
 app.MapControllers();
-app.MapIdentityApi<IdentityUser>();
+app.MapIdentityApi<User>();
 
 app.Run();

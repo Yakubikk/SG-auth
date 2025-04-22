@@ -54,3 +54,5 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 front-end/package-lock.json
+back-end-9/Uploads
+back-end-9/Migrations

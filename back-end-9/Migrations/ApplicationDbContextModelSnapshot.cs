@@ -86,6 +86,11 @@ namespace back_end_9.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -136,6 +141,10 @@ namespace back_end_9.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", "hello");
+
+                    b.HasDiscriminator().HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -219,6 +228,87 @@ namespace back_end_9.Migrations
                     b.ToTable("AspNetUserTokens", "hello");
                 });
 
+            modelBuilder.Entity("back_end_9.Models.FileModel", b =>
+                {
+                    b.Property<Guid>("FileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("boolean");
+
+                    b.Property<long>("Size")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("FileId");
+
+                    b.ToTable("Files", "hello");
+                });
+
+            modelBuilder.Entity("back_end_9.Models.ShortUrl", b =>
+                {
+                    b.Property<Guid>("ShortUrlId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("FileId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ShortUrlId");
+
+                    b.HasIndex("FileId");
+
+                    b.ToTable("ShortUrls", "hello");
+                });
+
+            modelBuilder.Entity("back_end_9.Models.UserFile", b =>
+                {
+                    b.Property<Guid>("UserFileId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("FileId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("UserFileId");
+
+                    b.HasIndex("FileId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserFiles", "hello");
+                });
+
+            modelBuilder.Entity("back_end_9.Models.User", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -268,6 +358,46 @@ namespace back_end_9.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("back_end_9.Models.ShortUrl", b =>
+                {
+                    b.HasOne("back_end_9.Models.FileModel", "File")
+                        .WithMany("ShortUrls")
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
+                });
+
+            modelBuilder.Entity("back_end_9.Models.UserFile", b =>
+                {
+                    b.HasOne("back_end_9.Models.FileModel", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("back_end_9.Models.User", "User")
+                        .WithMany("UserFiles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("back_end_9.Models.FileModel", b =>
+                {
+                    b.Navigation("ShortUrls");
+                });
+
+            modelBuilder.Entity("back_end_9.Models.User", b =>
+                {
+                    b.Navigation("UserFiles");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,7 +1,9 @@
 ﻿using System.Security.Claims;
 using back_end_9.Api;
 using back_end_9.Data;
+using back_end_9.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +11,7 @@ namespace back_end_9.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UserController(ApplicationDbContext context) : ControllerBase
+public class UserController(ApplicationDbContext context, UserManager<User> userManager) : ControllerBase
 { 
     [Authorize]
     [HttpGet("check")]
@@ -26,14 +28,19 @@ public class UserController(ApplicationDbContext context) : ControllerBase
             return Unauthorized();
         }
 
-        var user = await context.Users.FindAsync(userId);
+        var user = await userManager.Users.FirstAsync(u => u.Id == userId);
+        var userRoles = await userManager.GetRolesAsync(user);
         
-        if (user == null)
+        var userWithRoles = new 
         {
-            return NotFound();
-        }
+            user.Id,
+            user.UserName,
+            user.Email,
+            user.PhoneNumber,
+            Roles = userRoles
+        };
 
-        return Ok(user);
+        return Ok(userWithRoles);
     }
     
     [Authorize]
@@ -82,6 +89,7 @@ public class UserController(ApplicationDbContext context) : ControllerBase
         existingUser.UserName = updateRequest.UserName;
         existingUser.NormalizedUserName = updateRequest.UserName.ToUpper();
         existingUser.Email = updateRequest.Email;
+        existingUser.NormalizedEmail = updateRequest.Email.ToUpper();
         existingUser.PhoneNumber = updateRequest.PhoneNumber;
         
         await context.SaveChangesAsync();
