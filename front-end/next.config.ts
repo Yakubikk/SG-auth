@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     ],
     experimental: {
       serverActions: {
-        allowedOrigins: ['kaftp.online', 'localhost:3000'], 
+        allowedOrigins: ['kaftp.online', 'localhost:3000', 'http://kaftp.online:5000'], 
       },
     },
 };

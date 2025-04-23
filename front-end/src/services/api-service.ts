@@ -156,17 +156,16 @@ const ApiService = {
         );
     },
 
-    uploadFile: async (userId: string, file: File): Promise<FileModel | undefined> => {
+    uploadFile: async (userId: string, file: File): Promise<void> => {
         const formData = new FormData();
         formData.append('file', file);
-
-        return getResponseData<FileModel>(
+        return getResponseData(
             await api.post(`/Files/User/${userId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-        );
+        )
     },
 
     deleteFile: async (id: string): Promise<void> => {

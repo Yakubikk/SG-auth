@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace back_end_9.Controllers;
 
-[Authorize]
 [Route("[controller]")]
 [ApiController]
 public class FilesController(ApplicationDbContext context) : ControllerBase
@@ -45,6 +44,7 @@ public class FilesController(ApplicationDbContext context) : ControllerBase
         return Ok(userFiles);
     }
 
+    [Authorize]
     // POST: Files/User/{userId}
     [HttpPost("User/{userId:guid}")]
     [Consumes("multipart/form-data")]
