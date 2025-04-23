@@ -11,10 +11,35 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<FileModel> Files { get; set; }
     public DbSet<ShortUrl> ShortUrls { get; set; }
     public DbSet<UserFile> UserFiles { get; set; }
+    
+    
+    public DbSet<Manufacturer> Manufacturers { get; set; }
+    public DbSet<WagonType> WagonTypes { get; set; }
+    public DbSet<Registrar> Registrars { get; set; }
+    public DbSet<RailwayCistern> RailwayCisterns { get; set; }
+    public DbSet<Vessel> Vessels { get; set; }
+    public DbSet<Part> Parts { get; set; }
+    public DbSet<WheelPair> WheelPairs { get; set; }
+    public DbSet<SideFrame> SideFrames { get; set; }
+    public DbSet<Bolster> Bolsters { get; set; }
+    public DbSet<Coupler> Couplers { get; set; }
+    public DbSet<ShockAbsorber> ShockAbsorbers { get; set; }
+    public DbSet<Location> Locations { get; set; }
+    public DbSet<PartInstallation> PartInstallations { get; set; }
+    
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.HasDefaultSchema("hello");
+        
+        builder.Entity<RailwayCistern>()
+            .HasIndex(r => r.RegistrationNumber)
+            .IsUnique();
+            
+        builder.Entity<Vessel>()
+            .HasIndex(v => v.RailwayCisternsId)
+            .IsUnique();
         
         builder.Entity<FileModel>()
             .HasKey(f => f.FileId);
@@ -36,5 +61,20 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             .HasOne(uf => uf.User)
             .WithMany(u => u.UserFiles)
             .HasForeignKey(uf => uf.UserId);
+        
+        builder.Entity<Location>()
+            .HasIndex(l => l.Name)
+            .IsUnique();
+        
+        builder.Entity<Location>()
+            .HasMany(l => l.FromInstallations)
+            .WithOne(p => p.FromLocation)
+            .HasForeignKey(f => f.FromLocationId);
+        
+        builder.Entity<Location>()
+            .HasMany(l => l.ToInstallations)
+            .WithOne(p => p.ToLocation)
+            .HasForeignKey(f => f.ToLocationId);
+            
     }
 }
