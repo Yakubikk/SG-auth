@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.Parts;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,59 +8,55 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class PartsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public PartsController(ApplicationDbContext context)
+    public PartsController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Part>>> GetParts()
+    public async Task<ActionResult<IEnumerable<PartDTO>>> GetParts()
     {
-        return await _context.Parts.ToListAsync();
+        var parts = await _context.Parts.ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<PartDTO>>(parts));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Part>> GetPart(Guid id)
+    public async Task<ActionResult<PartDTO>> GetPart(Guid id)
     {
         var part = await _context.Parts.FindAsync(id);
         if (part == null) return NotFound();
-
-        return part;
+        return _mapper.Map<PartDTO>(part);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Part>> CreatePart(Part part)
+    public async Task<ActionResult<PartDTO>> CreatePart(CreatePartDTO createDto)
     {
+        var part = _mapper.Map<Part>(createDto);
         part.PartId = Guid.NewGuid();
         part.CreatedAt = DateTime.UtcNow;
         
         _context.Parts.Add(part);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetPart", new { id = part.PartId }, part);
+        var partDto = _mapper.Map<PartDTO>(part);
+        return CreatedAtAction(nameof(GetPart), new { id = partDto.PartId }, partDto);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePart(Guid id, Part part)
+    public async Task<IActionResult> UpdatePart(Guid id, UpdatePartDTO updateDto)
     {
-        if (id != part.PartId) return BadRequest();
+        var part = await _context.Parts.FindAsync(id);
+        if (part == null) return NotFound();
 
-        _context.Entry(part).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!PartExists(id)) return NotFound();
-            else throw;
-        }
+        _mapper.Map(updateDto, part);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
@@ -74,6 +72,4 @@ public class PartsController : ControllerBase
 
         return NoContent();
     }
-
-    private bool PartExists(Guid id) => _context.Parts.Any(e => e.PartId == id);
 }

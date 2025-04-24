@@ -10,7 +10,7 @@ public class Coupler
     public Guid PartId { get; set; }
     public Part Part { get; set; }
 
-    [Required]
-    [MaxLength(50)]
-    public string Name { get; set; }
+    [ForeignKey("CouplerModel")]
+    public Guid? ModelId { get; set; }
+    public CouplerModel? CouplerModel { get; set; }
 }

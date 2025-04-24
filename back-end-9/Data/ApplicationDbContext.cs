@@ -22,6 +22,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<WheelPair> WheelPairs { get; set; }
     public DbSet<SideFrame> SideFrames { get; set; }
     public DbSet<Bolster> Bolsters { get; set; }
+    public DbSet<CouplerModel> CouplerModels { get; set; }
     public DbSet<Coupler> Couplers { get; set; }
     public DbSet<ShockAbsorber> ShockAbsorbers { get; set; }
     public DbSet<Location> Locations { get; set; }

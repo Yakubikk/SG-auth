@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.PartInstallations;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,29 +8,32 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class PartInstallationsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public PartInstallationsController(ApplicationDbContext context)
+    public PartInstallationsController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PartInstallation>>> GetPartInstallations()
+    public async Task<ActionResult<IEnumerable<PartInstallationDTO>>> GetPartInstallations()
     {
-        return await _context.PartInstallations
+        var installations = await _context.PartInstallations
             .Include(p => p.Part)
             .Include(p => p.Wagon)
             .Include(p => p.FromLocation)
             .Include(p => p.ToLocation)
             .ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<PartInstallationDTO>>(installations));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<PartInstallation>> GetPartInstallation(Guid id)
+    public async Task<ActionResult<PartInstallationDTO>> GetPartInstallation(Guid id)
     {
         var installation = await _context.PartInstallations
             .Include(p => p.Part)
@@ -36,40 +41,32 @@ public class PartInstallationsController : ControllerBase
             .Include(p => p.FromLocation)
             .Include(p => p.ToLocation)
             .FirstOrDefaultAsync(p => p.InstallationId == id);
-
         if (installation == null) return NotFound();
-
-        return installation;
+        return _mapper.Map<PartInstallationDTO>(installation);
     }
 
     [HttpPost]
-    public async Task<ActionResult<PartInstallation>> CreatePartInstallation(PartInstallation installation)
+    public async Task<ActionResult<PartInstallationDTO>> CreatePartInstallation(CreatePartInstallationDTO createDto)
     {
+        var installation = _mapper.Map<PartInstallation>(createDto);
         installation.InstallationId = Guid.NewGuid();
         installation.InstalledAt = DateTime.UtcNow;
-
+        
         _context.PartInstallations.Add(installation);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetPartInstallation", new { id = installation.InstallationId }, installation);
+        var installationDto = _mapper.Map<PartInstallationDTO>(installation);
+        return CreatedAtAction(nameof(GetPartInstallation), new { id = installationDto.InstallationId }, installationDto);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePartInstallation(Guid id, PartInstallation installation)
+    public async Task<IActionResult> UpdatePartInstallation(Guid id, UpdatePartInstallationDTO updateDto)
     {
-        if (id != installation.InstallationId) return BadRequest();
+        var installation = await _context.PartInstallations.FindAsync(id);
+        if (installation == null) return NotFound();
 
-        _context.Entry(installation).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!PartInstallationExists(id)) return NotFound();
-            else throw;
-        }
+        _mapper.Map(updateDto, installation);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
@@ -85,6 +82,4 @@ public class PartInstallationsController : ControllerBase
 
         return NoContent();
     }
-
-    private bool PartInstallationExists(Guid id) => _context.PartInstallations.Any(e => e.InstallationId == id);
 }

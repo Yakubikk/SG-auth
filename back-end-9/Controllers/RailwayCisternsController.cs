@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.RailwayCisterns;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,108 +8,78 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class RailwayCisternsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public RailwayCisternsController(ApplicationDbContext context)
+    public RailwayCisternsController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    // GET: api/RailwayCisterns
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<RailwayCistern>>> GetRailwayCisterns()
+    public async Task<ActionResult<IEnumerable<RailwayCisternDTO>>> GetRailwayCisterns()
     {
-        return await _context.RailwayCisterns
+        var cisterns = await _context.RailwayCisterns
             .Include(rc => rc.Manufacturer)
             .Include(rc => rc.WagonType)
             .Include(rc => rc.Registrar)
             .ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<RailwayCisternDTO>>(cisterns));
     }
 
-    // GET: api/RailwayCisterns/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<RailwayCistern>> GetRailwayCistern(Guid id)
+    public async Task<ActionResult<RailwayCisternDTO>> GetRailwayCistern(Guid id)
     {
-        var railwayCistern = await _context.RailwayCisterns
+        var cistern = await _context.RailwayCisterns
             .Include(rc => rc.Manufacturer)
             .Include(rc => rc.WagonType)
             .Include(rc => rc.Registrar)
             .FirstOrDefaultAsync(rc => rc.Id == id);
-
-        if (railwayCistern == null)
-        {
-            return NotFound();
-        }
-
-        return railwayCistern;
+        if (cistern == null) return NotFound();
+        return _mapper.Map<RailwayCisternDTO>(cistern);
     }
 
-    // POST: api/RailwayCisterns
     [HttpPost]
-    public async Task<ActionResult<RailwayCistern>> PostRailwayCistern(RailwayCistern railwayCistern)
+    public async Task<ActionResult<RailwayCisternDTO>> CreateRailwayCistern(CreateRailwayCisternDTO createDto)
     {
-        railwayCistern.Id = Guid.NewGuid();
-        railwayCistern.CreatedAt = DateTime.UtcNow;
-        railwayCistern.UpdatedAt = DateTime.UtcNow;
-
-        _context.RailwayCisterns.Add(railwayCistern);
+        var cistern = _mapper.Map<RailwayCistern>(createDto);
+        cistern.Id = Guid.NewGuid();
+        cistern.CreatedAt = DateTime.UtcNow;
+        cistern.UpdatedAt = DateTime.UtcNow;
+        
+        _context.RailwayCisterns.Add(cistern);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetRailwayCistern", new { id = railwayCistern.Id }, railwayCistern);
+        var cisternDto = _mapper.Map<RailwayCisternDTO>(cistern);
+        return CreatedAtAction(nameof(GetRailwayCistern), new { id = cisternDto.Id }, cisternDto);
     }
 
-    // PUT: api/RailwayCisterns/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutRailwayCistern(Guid id, RailwayCistern railwayCistern)
+    public async Task<IActionResult> UpdateRailwayCistern(Guid id, UpdateRailwayCisternDTO updateDto)
     {
-        if (id != railwayCistern.Id)
-        {
-            return BadRequest();
-        }
+        var cistern = await _context.RailwayCisterns.FindAsync(id);
+        if (cistern == null) return NotFound();
 
-        railwayCistern.UpdatedAt = DateTime.UtcNow;
-        _context.Entry(railwayCistern).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!RailwayCisternExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+        _mapper.Map(updateDto, cistern);
+        cistern.UpdatedAt = DateTime.UtcNow;
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
-    // DELETE: api/RailwayCisterns/{id}
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRailwayCistern(Guid id)
     {
-        var railwayCistern = await _context.RailwayCisterns.FindAsync(id);
-        if (railwayCistern == null)
-        {
-            return NotFound();
-        }
+        var cistern = await _context.RailwayCisterns.FindAsync(id);
+        if (cistern == null) return NotFound();
 
-        _context.RailwayCisterns.Remove(railwayCistern);
+        _context.RailwayCisterns.Remove(cistern);
         await _context.SaveChangesAsync();
 
         return NoContent();
-    }
-
-    private bool RailwayCisternExists(Guid id)
-    {
-        return _context.RailwayCisterns.Any(e => e.Id == id);
     }
 }

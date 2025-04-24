@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.Manufacturers;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,96 +8,67 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class ManufacturersController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public ManufacturersController(ApplicationDbContext context)
+    public ManufacturersController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    // GET: api/Manufacturers
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Manufacturer>>> GetManufacturers()
+    public async Task<ActionResult<IEnumerable<ManufacturerDTO>>> GetManufacturers()
     {
-        return await _context.Manufacturers.ToListAsync();
+        var manufacturers = await _context.Manufacturers.ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<ManufacturerDTO>>(manufacturers));
     }
 
-    // GET: api/Manufacturers/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Manufacturer>> GetManufacturer(Guid id)
+    public async Task<ActionResult<ManufacturerDTO>> GetManufacturer(Guid id)
     {
         var manufacturer = await _context.Manufacturers.FindAsync(id);
-
-        if (manufacturer == null)
-        {
-            return NotFound();
-        }
-
-        return manufacturer;
+        if (manufacturer == null) return NotFound();
+        return _mapper.Map<ManufacturerDTO>(manufacturer);
     }
 
-    // POST: api/Manufacturers
     [HttpPost]
-    public async Task<ActionResult<Manufacturer>> PostManufacturer(Manufacturer manufacturer)
+    public async Task<ActionResult<ManufacturerDTO>> CreateManufacturer(CreateManufacturerDTO createDto)
     {
+        var manufacturer = _mapper.Map<Manufacturer>(createDto);
         manufacturer.Id = Guid.NewGuid();
+        
         _context.Manufacturers.Add(manufacturer);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetManufacturer", new { id = manufacturer.Id }, manufacturer);
+        var manufacturerDto = _mapper.Map<ManufacturerDTO>(manufacturer);
+        return CreatedAtAction(nameof(GetManufacturer), new { id = manufacturerDto.Id }, manufacturerDto);
     }
 
-    // PUT: api/Manufacturers/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutManufacturer(Guid id, Manufacturer manufacturer)
+    public async Task<IActionResult> UpdateManufacturer(Guid id, UpdateManufacturerDTO updateDto)
     {
-        if (id != manufacturer.Id)
-        {
-            return BadRequest();
-        }
+        var manufacturer = await _context.Manufacturers.FindAsync(id);
+        if (manufacturer == null) return NotFound();
 
-        _context.Entry(manufacturer).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ManufacturerExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+        _mapper.Map(updateDto, manufacturer);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
-    // DELETE: api/Manufacturers/{id}
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteManufacturer(Guid id)
     {
         var manufacturer = await _context.Manufacturers.FindAsync(id);
-        if (manufacturer == null)
-        {
-            return NotFound();
-        }
+        if (manufacturer == null) return NotFound();
 
         _context.Manufacturers.Remove(manufacturer);
         await _context.SaveChangesAsync();
 
         return NoContent();
-    }
-
-    private bool ManufacturerExists(Guid id)
-    {
-        return _context.Manufacturers.Any(e => e.Id == id);
     }
 }

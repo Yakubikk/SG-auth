@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.Registrars;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,96 +8,67 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class RegistrarsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public RegistrarsController(ApplicationDbContext context)
+    public RegistrarsController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    // GET: api/Registrars
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Registrar>>> GetRegistrars()
+    public async Task<ActionResult<IEnumerable<RegistrarDTO>>> GetRegistrars()
     {
-        return await _context.Registrars.ToListAsync();
+        var registrars = await _context.Registrars.ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<RegistrarDTO>>(registrars));
     }
 
-    // GET: api/Registrars/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Registrar>> GetRegistrar(Guid id)
+    public async Task<ActionResult<RegistrarDTO>> GetRegistrar(Guid id)
     {
         var registrar = await _context.Registrars.FindAsync(id);
-
-        if (registrar == null)
-        {
-            return NotFound();
-        }
-
-        return registrar;
+        if (registrar == null) return NotFound();
+        return _mapper.Map<RegistrarDTO>(registrar);
     }
 
-    // POST: api/Registrars
     [HttpPost]
-    public async Task<ActionResult<Registrar>> PostRegistrar(Registrar registrar)
+    public async Task<ActionResult<RegistrarDTO>> CreateRegistrar(CreateRegistrarDTO createDto)
     {
+        var registrar = _mapper.Map<Registrar>(createDto);
         registrar.Id = Guid.NewGuid();
+        
         _context.Registrars.Add(registrar);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetRegistrar", new { id = registrar.Id }, registrar);
+        var registrarDto = _mapper.Map<RegistrarDTO>(registrar);
+        return CreatedAtAction(nameof(GetRegistrar), new { id = registrarDto.Id }, registrarDto);
     }
 
-    // PUT: api/Registrars/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutRegistrar(Guid id, Registrar registrar)
+    public async Task<IActionResult> UpdateRegistrar(Guid id, UpdateRegistrarDTO updateDto)
     {
-        if (id != registrar.Id)
-        {
-            return BadRequest();
-        }
+        var registrar = await _context.Registrars.FindAsync(id);
+        if (registrar == null) return NotFound();
 
-        _context.Entry(registrar).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!RegistrarExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+        _mapper.Map(updateDto, registrar);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
-    // DELETE: api/Registrars/{id}
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteRegistrar(Guid id)
     {
         var registrar = await _context.Registrars.FindAsync(id);
-        if (registrar == null)
-        {
-            return NotFound();
-        }
+        if (registrar == null) return NotFound();
 
         _context.Registrars.Remove(registrar);
         await _context.SaveChangesAsync();
 
         return NoContent();
-    }
-
-    private bool RegistrarExists(Guid id)
-    {
-        return _context.Registrars.Any(e => e.Id == id);
     }
 }

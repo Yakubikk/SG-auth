@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.Locations;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,57 +8,54 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class LocationsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public LocationsController(ApplicationDbContext context)
+    public LocationsController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
+    public async Task<ActionResult<IEnumerable<LocationDTO>>> GetLocations()
     {
-        return await _context.Locations.ToListAsync();
+        var locations = await _context.Locations.ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<LocationDTO>>(locations));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Location>> GetLocation(Guid id)
+    public async Task<ActionResult<LocationDTO>> GetLocation(Guid id)
+    {
+        var location = await _context.Locations.FindAsync(id);
+        if (location == null) return NotFound();
+        return _mapper.Map<LocationDTO>(location);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<LocationDTO>> CreateLocation(CreateLocationDTO createDto)
+    {
+        var location = _mapper.Map<Location>(createDto);
+        location.LocationId = Guid.NewGuid();
+        
+        _context.Locations.Add(location);
+        await _context.SaveChangesAsync();
+
+        var locationDto = _mapper.Map<LocationDTO>(location);
+        return CreatedAtAction(nameof(GetLocation), new { id = locationDto.LocationId }, locationDto);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateLocation(Guid id, UpdateLocationDTO updateDto)
     {
         var location = await _context.Locations.FindAsync(id);
         if (location == null) return NotFound();
 
-        return location;
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<Location>> CreateLocation(Location location)
-    {
-        location.LocationId = Guid.NewGuid();
-        _context.Locations.Add(location);
+        _mapper.Map(updateDto, location);
         await _context.SaveChangesAsync();
-
-        return CreatedAtAction("GetLocation", new { id = location.LocationId }, location);
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateLocation(Guid id, Location location)
-    {
-        if (id != location.LocationId) return BadRequest();
-
-        _context.Entry(location).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!LocationExists(id)) return NotFound();
-            else throw;
-        }
 
         return NoContent();
     }
@@ -72,6 +71,4 @@ public class LocationsController : ControllerBase
 
         return NoContent();
     }
-
-    private bool LocationExists(Guid id) => _context.Locations.Any(e => e.LocationId == id);
 }

@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.Vessels;
 using back_end_9.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,100 +8,71 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class VesselsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public VesselsController(ApplicationDbContext context)
+    public VesselsController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    // GET: api/Vessels
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Vessel>>> GetVessels()
+    public async Task<ActionResult<IEnumerable<VesselDTO>>> GetVessels()
     {
-        return await _context.Vessels
+        var vessels = await _context.Vessels
             .Include(v => v.RailwayCistern)
             .ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<VesselDTO>>(vessels));
     }
 
-    // GET: api/Vessels/{id}
     [HttpGet("{id}")]
-    public async Task<ActionResult<Vessel>> GetVessel(Guid id)
+    public async Task<ActionResult<VesselDTO>> GetVessel(Guid id)
     {
         var vessel = await _context.Vessels
             .Include(v => v.RailwayCistern)
             .FirstOrDefaultAsync(v => v.Id == id);
-
-        if (vessel == null)
-        {
-            return NotFound();
-        }
-
-        return vessel;
+        if (vessel == null) return NotFound();
+        return _mapper.Map<VesselDTO>(vessel);
     }
 
-    // POST: api/Vessels
     [HttpPost]
-    public async Task<ActionResult<Vessel>> PostVessel(Vessel vessel)
+    public async Task<ActionResult<VesselDTO>> CreateVessel(CreateVesselDTO createDto)
     {
+        var vessel = _mapper.Map<Vessel>(createDto);
         vessel.Id = Guid.NewGuid();
+        
         _context.Vessels.Add(vessel);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetVessel", new { id = vessel.Id }, vessel);
+        var vesselDto = _mapper.Map<VesselDTO>(vessel);
+        return CreatedAtAction(nameof(GetVessel), new { id = vesselDto.Id }, vesselDto);
     }
 
-    // PUT: api/Vessels/{id}
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutVessel(Guid id, Vessel vessel)
+    public async Task<IActionResult> UpdateVessel(Guid id, UpdateVesselDTO updateDto)
     {
-        if (id != vessel.Id)
-        {
-            return BadRequest();
-        }
+        var vessel = await _context.Vessels.FindAsync(id);
+        if (vessel == null) return NotFound();
 
-        _context.Entry(vessel).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!VesselExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
+        _mapper.Map(updateDto, vessel);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
-    // DELETE: api/Vessels/{id}
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteVessel(Guid id)
     {
         var vessel = await _context.Vessels.FindAsync(id);
-        if (vessel == null)
-        {
-            return NotFound();
-        }
+        if (vessel == null) return NotFound();
 
         _context.Vessels.Remove(vessel);
         await _context.SaveChangesAsync();
 
         return NoContent();
-    }
-
-    private bool VesselExists(Guid id)
-    {
-        return _context.Vessels.Any(e => e.Id == id);
     }
 }

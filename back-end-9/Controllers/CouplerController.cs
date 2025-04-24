@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end_9.Data;
+using back_end_9.DTOs.Couplers;
 using back_end_9.Models;
 using back_end_9.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
@@ -7,67 +9,67 @@ using Microsoft.EntityFrameworkCore;
 namespace back_end_9.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
-public class CouplerController : ControllerBase
+[Route("[controller]")]
+public class CouplersController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly IMapper _mapper;
 
-    public CouplerController(ApplicationDbContext context)
+    public CouplersController(ApplicationDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Coupler>>> GetCouplers()
+    public async Task<ActionResult<IEnumerable<CouplerDTO>>> GetCouplers()
     {
-        return await _context.Couplers.Include(w => w.Part).ToListAsync();
+        var couplers = await _context.Couplers
+            .Include(c => c.Part)
+            .Include(c => c.CouplerModel)
+            .ToListAsync();
+        return Ok(_mapper.Map<IEnumerable<CouplerDTO>>(couplers));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Coupler>> GetCoupler(Guid id)
+    public async Task<ActionResult<CouplerDTO>> GetCoupler(Guid id)
     {
         var coupler = await _context.Couplers
-            .Include(w => w.Part)
-            .FirstOrDefaultAsync(w => w.PartId == id);
-
+            .Include(c => c.Part)
+            .Include(c => c.CouplerModel)
+            .FirstOrDefaultAsync(c => c.PartId == id);
         if (coupler == null) return NotFound();
-
-        return coupler;
+        return _mapper.Map<CouplerDTO>(coupler);
     }
 
     [HttpPost]
-    public async Task<ActionResult<Coupler>> CreateCoupler(Coupler coupler)
+    public async Task<ActionResult<CouplerDTO>> CreateCoupler(CreateCouplerDTO createDto)
     {
+        var coupler = _mapper.Map<Coupler>(createDto);
         coupler.PartId = Guid.NewGuid();
-        coupler.Part = new Part
-        {
-            PartId = coupler.PartId,
-            PartType = PartType.coupler,
-            CreatedAt = DateTime.UtcNow
-        };
-
+        coupler.Part = _mapper.Map<Part>(createDto.Part);
+        coupler.Part.PartId = coupler.PartId;
+        coupler.Part.PartType = PartType.coupler;
+        coupler.Part.CreatedAt = DateTime.UtcNow;
+        
         _context.Couplers.Add(coupler);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetCoupler", new { id = coupler.PartId }, coupler);
+        var couplerDto = _mapper.Map<CouplerDTO>(coupler);
+        return CreatedAtAction(nameof(GetCoupler), new { id = couplerDto.PartId }, couplerDto);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateCoupler(Guid id, Coupler coupler)
+    public async Task<IActionResult> UpdateCoupler(Guid id, UpdateCouplerDTO updateDto)
     {
-        if (id != coupler.PartId) return BadRequest();
+        var coupler = await _context.Couplers
+            .Include(c => c.Part)
+            .FirstOrDefaultAsync(c => c.PartId == id);
+        if (coupler == null) return NotFound();
 
-        _context.Entry(coupler).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!CouplerExists(id)) return NotFound();
-            else throw;
-        }
+        _mapper.Map(updateDto, coupler);
+        _mapper.Map(updateDto.Part, coupler.Part);
+        await _context.SaveChangesAsync();
 
         return NoContent();
     }
@@ -83,6 +85,4 @@ public class CouplerController : ControllerBase
 
         return NoContent();
     }
-
-    private bool CouplerExists(Guid id) => _context.Couplers.Any(e => e.PartId == id);
 }
