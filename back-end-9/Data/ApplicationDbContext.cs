@@ -28,6 +28,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Location> Locations { get; set; }
     public DbSet<PartInstallation> PartInstallations { get; set; }
     
+    public DbSet<WagonModel> WagonModels { get; set; }
+    
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -76,6 +78,17 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             .HasMany(l => l.ToInstallations)
             .WithOne(p => p.ToLocation)
             .HasForeignKey(f => f.ToLocationId);
-            
+         
+        
+        builder.Entity<WagonModel>()
+            .HasIndex(w => w.Name)
+            .IsUnique();
+        
+        // Обновленная конфигурация для RailwayCistern
+        builder.Entity<RailwayCistern>()
+            .HasOne(rc => rc.WagonModel)
+            .WithMany(wm => wm.RailwayCisterns)
+            .HasForeignKey(rc => rc.ModelId)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

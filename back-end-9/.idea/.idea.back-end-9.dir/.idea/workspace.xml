@@ -10,41 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="190f748a-6388-46b4-bca3-68b6cb0062ce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Controllers/BolstersController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controllers/CouplerModelsController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controllers/ShockAbsorbersController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controllers/SideFramesController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Bolsters/BolsterDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/CouplerModels/CouplerModelDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Couplers/CouplerDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Locations/LocationDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Manufacturers/ManufacturerDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/PartInstallations/PartInstallationDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Parts/PartDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/RailwayCisterns/RailwayCisternDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Registrars/RegistrarDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/ShockAbsorbers/ShockAbsorberDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/SideFrames/SideFrameDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/Vessels/VesselDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/WagonTypes/WagonTypeDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DTOs/WheelPairs/WheelPairDTO.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Mapping/MappingProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/CouplerModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.back-end-9.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.back-end-9.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/CouplerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/CouplerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/LocationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/LocationsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ManufacturersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ManufacturersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/PartInstallationsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/PartInstallationsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/PartsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/PartsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/RailwayCisternsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RailwayCisternsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/RegistrarsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RegistrarsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/VesselsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/VesselsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/WagonTypesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/WagonTypesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/WheelPairsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/WheelPairsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Coupler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Coupler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end-9.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/back-end-9.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +111,7 @@
       <workItem from="1745437508528" duration="4047000" />
       <workItem from="1745441957343" duration="4292000" />
       <workItem from="1745523246841" duration="7201000" />
+      <workItem from="1746798836407" duration="614000" />
     </task>
     <servers />
   </component>

@@ -27,6 +27,7 @@ public class RailwayCisternsController : ControllerBase
             .Include(rc => rc.Manufacturer)
             .Include(rc => rc.WagonType)
             .Include(rc => rc.Registrar)
+            .Include(rc => rc.WagonModel) // Добавляем включение модели
             .ToListAsync();
         return Ok(_mapper.Map<IEnumerable<RailwayCisternDTO>>(cisterns));
     }
@@ -38,6 +39,7 @@ public class RailwayCisternsController : ControllerBase
             .Include(rc => rc.Manufacturer)
             .Include(rc => rc.WagonType)
             .Include(rc => rc.Registrar)
+            .Include(rc => rc.WagonModel) // Добавляем включение модели
             .FirstOrDefaultAsync(rc => rc.Id == id);
         if (cistern == null) return NotFound();
         return _mapper.Map<RailwayCisternDTO>(cistern);

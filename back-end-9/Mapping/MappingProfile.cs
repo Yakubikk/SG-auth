@@ -11,6 +11,7 @@ using back_end_9.DTOs.Registrars;
 using back_end_9.DTOs.ShockAbsorbers;
 using back_end_9.DTOs.SideFrames;
 using back_end_9.DTOs.Vessels;
+using back_end_9.DTOs.WagonModel;
 using back_end_9.DTOs.WagonTypes;
 using back_end_9.DTOs.WheelPairs;
 using back_end_9.Models;
@@ -24,6 +25,11 @@ public class MappingProfile : Profile
         CreateMap<Manufacturer, ManufacturerDTO>().ReverseMap();
         CreateMap<Manufacturer, CreateManufacturerDTO>().ReverseMap();
         CreateMap<Manufacturer, UpdateManufacturerDTO>().ReverseMap();
+        
+        // WagonModels
+        CreateMap<WagonModel, WagonModelDTO>().ReverseMap();
+        CreateMap<WagonModel, CreateWagonModelDTO>().ReverseMap();
+        CreateMap<WagonModel, UpdateWagonModelDTO>().ReverseMap();
 
         // WagonTypes
         CreateMap<WagonType, WagonTypeDTO>().ReverseMap();
@@ -40,6 +46,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.ManufacturerId, opt => opt.MapFrom(src => src.Manufacturer.Id))
             .ForMember(dest => dest.TypeId, opt => opt.MapFrom(src => src.WagonType.Id))
             .ForMember(dest => dest.RegistrarId, opt => opt.MapFrom(src => src.Registrar.Id))
+            .ForMember(dest => dest.ModelId, opt => opt.MapFrom(src => src.WagonModel.ModelId))
             .ReverseMap();
         
         CreateMap<RailwayCistern, CreateRailwayCisternDTO>().ReverseMap();

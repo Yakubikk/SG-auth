@@ -1,3 +1,5 @@
+using back_end_9.DTOs.WagonModel;
+
 namespace back_end_9.DTOs.RailwayCisterns;
 
 public class RailwayCisternDTO
@@ -21,6 +23,9 @@ public class RailwayCisternDTO
     public string Notes { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    
+    public Guid? ModelId { get; set; }
+    public WagonModelDTO WagonModel { get; set; }
 }
 
 public class CreateRailwayCisternDTO
@@ -41,6 +46,8 @@ public class CreateRailwayCisternDTO
     public DateTime RegistrationDate { get; set; }
     public Guid? RegistrarId { get; set; }
     public string Notes { get; set; }
+    
+    public Guid? ModelId { get; set; }
 }
 
 public class UpdateRailwayCisternDTO
@@ -61,4 +68,6 @@ public class UpdateRailwayCisternDTO
     public DateTime RegistrationDate { get; set; }
     public Guid? RegistrarId { get; set; }
     public string Notes { get; set; }
+    
+    public Guid? ModelId { get; set; }
 }
