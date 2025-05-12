@@ -3,7 +3,7 @@ import { LoginBlock } from '@/components'
 
 export default function LoginPage() {
     return (
-        <div className='flex h-full pt-56 justify-center'>
+        <div className='flex h-full justify-center'>
             <LoginBlock />
         </div>
     )

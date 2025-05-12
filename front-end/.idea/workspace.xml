@@ -5,36 +5,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1620a2c0-eaf2-4eea-a2ff-c35f841ab168" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Controllers/FilesController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Models/File.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Models/ShortUrl.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Models/User.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end-9/Models/UserFile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/(auth)/access-denied/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/blocks/admin/modals/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/blocks/admin/modals/upload/file-dropzone.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/blocks/admin/modals/upload/upload-button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/blocks/admin/modals/upload/upload-modal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/data-display/dialog/dialog.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/data-display/dialog/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stores/useUploadModal.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(auth)/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/(main)/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Calculator.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/auth/auth.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/cisterns/cisterns.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/cisterns/vessels.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/files/files.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/locations/locations.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/manufacturers/manufacturers.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/parts/installations.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/parts/parts-types/wheel-pairs.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/parts/parts.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/registrars/registrars.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/shared/base.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/shared/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/shared/tokens.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/api/wagon-types/wagon-types.api.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/check-access.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/with-auth.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../back-end-9/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/Data/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/back-end-9.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/back-end-9.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end-9/back-end-9.http" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end-9/back-end-9.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/admin/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/blocks/admin/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/admin/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/data-display/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/data-display/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/access-denied/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/access-denied/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/(auth)/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(auth)/register/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(main)/admin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/admin/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(main)/admin/register/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(main)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/user/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/(main)/user/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/admin/modals/upload/upload-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/admin/modals/upload/upload-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/admin/update-user-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/admin/update-user-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-form.helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-form.helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/login/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/login/login-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/register/register-form-helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/register/register-form-helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/blocks/user/user-title.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/blocks/user/user-title.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/get-info-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/get-info-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/loading/Loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/loading/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/logout-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logout-button.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/api-service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/api-service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/api-service.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/entities.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/entities.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,8 +57,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -83,8 +95,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/kafedra/SG-auth/front-end/src/components/blocks/main-page&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;front-end&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/kafedra/SG-auth/front-end/src/app&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -92,18 +104,23 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.build.executor&quot;: &quot;Run&quot;,
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\kafedra\\SG-auth\\front-end\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\kafedra\SG-auth\front-end\src\app" />
       <recent name="C:\kafedra\SG-auth\front-end\src\components\blocks\main-page" />
       <recent name="C:\kafedra\SG-auth\front-end\src\components" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\kafedra\SG-trans\front-end\src\app\(auth)" />
+      <recent name="C:\kafedra\SG-auth\front-end\src\app\(main)" />
+      <recent name="C:\kafedra\SG-auth\front-end\src\app\(auth)" />
+      <recent name="C:\kafedra\SG-auth\front-end\src\app" />
+      <recent name="C:\kafedra\SG-auth\front-end" />
+      <recent name="C:\kafedra\SG-auth\front-end\src" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -168,6 +185,17 @@
       <workItem from="1744917351051" duration="6564000" />
       <workItem from="1745263200894" duration="7222000" />
       <workItem from="1745307548136" duration="5844000" />
+      <workItem from="1745519022697" duration="9782000" />
+      <workItem from="1745673279137" duration="1071000" />
+      <workItem from="1745752070988" duration="8490000" />
+      <workItem from="1745783986806" duration="8269000" />
+      <workItem from="1745836704257" duration="447000" />
+      <workItem from="1745837180256" duration="1143000" />
+      <workItem from="1745843028560" duration="187000" />
+      <workItem from="1745843253481" duration="272000" />
+      <workItem from="1745843561607" duration="394000" />
+      <workItem from="1745844030114" duration="24000" />
+      <workItem from="1746717108272" duration="41000" />
     </task>
     <servers />
   </component>

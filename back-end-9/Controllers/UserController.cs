@@ -28,7 +28,13 @@ public class UserController(ApplicationDbContext context, UserManager<User> user
             return Unauthorized();
         }
 
-        var user = await userManager.Users.FirstAsync(u => u.Id == userId);
+        var user = await userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+        
         var userRoles = await userManager.GetRolesAsync(user);
         
         var userWithRoles = new 
@@ -60,7 +66,7 @@ public class UserController(ApplicationDbContext context, UserManager<User> user
             return BadRequest("User ID is required");
         }
 
-        var user = await context.Users.FindAsync(userId);
+        var user = await userManager.FindByIdAsync(userId);
         
         if (user == null)
         {
@@ -79,7 +85,7 @@ public class UserController(ApplicationDbContext context, UserManager<User> user
             return BadRequest("User ID is required");
         }
 
-        var existingUser = await context.Users.FindAsync(userId);
+        var existingUser = await userManager.FindByIdAsync(userId);
         
         if (existingUser == null)
         {
@@ -92,6 +98,7 @@ public class UserController(ApplicationDbContext context, UserManager<User> user
         existingUser.NormalizedEmail = updateRequest.Email.ToUpper();
         existingUser.PhoneNumber = updateRequest.PhoneNumber;
         
+        await userManager.UpdateAsync(existingUser);
         await context.SaveChangesAsync();
         
         return Ok(existingUser);

@@ -1,14 +1,9 @@
-'use client';
-
-import {useAuthStore} from "@/stores/useAuth";
-
-const UserTitle = () => {
-    const {user} = useAuthStore();
+const UserTitle = ({userName}: { userName: string }) => {
     return (
             <span
                 className="text-xl font-semibold mb-4"
             >
-                {`Welcome, ${user ? user.userName + '!' : ''}`}
+                {`Welcome, ${userName}!`}
             </span>
     );
 };

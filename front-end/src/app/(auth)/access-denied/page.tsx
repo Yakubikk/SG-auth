@@ -1,13 +1,8 @@
-'use client'
-
 import Link from 'next/link';
-import ApiService from "@/services/api-service";
+import {LogoutButton} from "@/components/logout-button";
+import withAuth from "@/services/with-auth";
 
-export default function AccessDenied() {
-    const handleLogout = async () => {
-        await ApiService.logout();
-    }
-
+function AccessDenied() {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 text-center">
@@ -43,15 +38,11 @@ export default function AccessDenied() {
                         Вернуться на главную
                     </Link>
 
-                    <button
-                        type='button'
-                        onClick={handleLogout}
-                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors text-center cursor-pointer"
-                    >
-                        Войти под другой учетной записью
-                    </button>
+                    <LogoutButton />
                 </div>
             </div>
         </div>
     );
 }
+
+export default withAuth(AccessDenied);

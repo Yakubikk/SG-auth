@@ -9,8 +9,8 @@ import type {LoginPayload} from '@/types';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import {onSubmitForm} from "@/components/blocks/login/login-form.helper";
-import {ApiService, setTokens} from "@/services/api-service";
 import {useAuthStore} from '@/stores/useAuth';
+import ApiService, {setTokens} from '@/services/api';
 
 export interface LoginFormValues {
     email: string;
@@ -41,8 +41,8 @@ const LoginForm: React.FC = () => {
         try {
             const response = await onSubmitForm(values);
             if (response) {
-                await setTokens(response.accessToken, response.refreshToken, response.expiresIn);
-                const userResponse = await ApiService.getUser();
+                await setTokens(response);
+                const userResponse = await ApiService.auth.getCurrentUser();
                 if (userResponse) {
                     console.log(userResponse);
                     setUser(userResponse);
@@ -51,7 +51,8 @@ const LoginForm: React.FC = () => {
             toast.success('Вход выполнен успешно!');
             router.push('/');
         } catch (error) {
-            toast.error(error as string);
+            console.error((error as Error).message);
+            toast.error('Неправильные учетные данные');
         }
     };
 

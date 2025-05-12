@@ -1,13 +1,13 @@
 'use client'
 
-import {ApiService} from "@/services/api-service";
 import toast from "react-hot-toast";
 import {useState} from "react";
+import ApiService from "@/services/api";
 
 export function GetInfoButton() {
     const handleGetUser = async () => {
         try {
-            const response = await ApiService.getUser();
+            const response = await ApiService.auth.getCurrentUser();
             console.log(response);
         } catch (error) {
             toast.error(error as string);
@@ -15,7 +15,7 @@ export function GetInfoButton() {
     };
     const handleGetAllUsers = async () => {
         try {
-            const response = await ApiService.getAllUsers();
+            const response = await ApiService.auth.getAllUsers();
             console.log(response);
         } catch (error) {
             toast.error(error as string);
@@ -25,7 +25,7 @@ export function GetInfoButton() {
     const [id, setId] = useState('');
     const handleGetUserById = async () => {
         try {
-            const response = await ApiService.getUserById(id);
+            const response = await ApiService.auth.getUserById(id);
             console.log(response);
         } catch (error) {
             toast.error(error as string);

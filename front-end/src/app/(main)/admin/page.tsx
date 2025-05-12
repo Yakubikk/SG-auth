@@ -1,8 +1,9 @@
 import { LogoutButton } from '@/components/logout-button'
 import Link from 'next/link'
 import {UpdateUserForm, UploadButtons} from "@/components";
+import withAuth from "@/services/with-auth";
 
-export default function AdminDashboard() {
+function AdminDashboard() {
    return (
         <div className="min-h-screen bg-gray-50 p-8">
             <div className="max-w-4xl mx-auto">
@@ -32,3 +33,7 @@ export default function AdminDashboard() {
         </div>
     )
 }
+
+export default withAuth(AdminDashboard, {
+    requiredRoles: ['Admin', 'SuperUser'],
+});

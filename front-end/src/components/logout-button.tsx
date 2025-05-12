@@ -1,12 +1,14 @@
 'use client'
 
-import {ApiService} from "@/services/api-service";
+import ApiService from "@/services/api";
+import {useAuthStore} from "@/stores/useAuth";
 
 export function LogoutButton() {
-
+    const { clearUser } = useAuthStore();
     const handleLogout = async () => {
         try {
-            await ApiService.logout();
+            clearUser();
+            await ApiService.auth.logout();
         } catch (error) {
             console.error(error);
         }

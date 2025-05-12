@@ -1,7 +1,8 @@
 import { RegisterBlock } from '@/components'
 import Link from 'next/link'
+import withAuth from "@/services/with-auth";
 
-export default function RegisterPage() {
+function RegisterPage() {
     return (
         <div className='min-h-screen bg-gray-50 p-8'>
             <div className='max-w-4xl mx-auto'>
@@ -17,3 +18,7 @@ export default function RegisterPage() {
         </div>
     )
 }
+
+export default withAuth(RegisterPage, {
+    requiredRoles: ['Admin']
+});

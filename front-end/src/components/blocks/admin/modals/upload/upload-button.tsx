@@ -15,8 +15,8 @@ import {IconUpload} from "@tabler/icons-react";
 import {UploadModal} from "./upload-modal";
 import {useFileModal} from "@/stores/useUploadModal";
 import {VisuallyHidden} from "@radix-ui/react-visually-hidden";
-import ApiService from "@/services/api-service";
 import {useAuthStore} from "@/stores/useAuth";
+import ApiService from "@/services/api";
 
 const UploadButtons: React.FC = () => {
     const fileModal = useFileModal();
@@ -24,7 +24,7 @@ const UploadButtons: React.FC = () => {
 
     const uploadFile = async (file: File) => {
         if (user) {
-            await ApiService.uploadFile(user.id, file);
+            await ApiService.files.upload(user.id, file);
         }
     };
 

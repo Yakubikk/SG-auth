@@ -5,8 +5,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Button } from '@/components';
 import { TextField } from '@/components/inputs/text-field';
 import { cn } from '@/lib/utils';
-import ApiService from "@/services/api-service";
 import {useAuthStore} from "@/stores/useAuth";
+import ApiService from "@/services/api";
 
 export interface UserFormValues {
     username: string;
@@ -45,7 +45,7 @@ const UpdateUserForm: React.FC = () => {
 
     const onSubmit = async (values: UserFormValues) => {
         if (user) {
-            const response = await ApiService.updateUser(user.id, values);
+            const response = await ApiService.auth.updateUser(user.id, values);
             if (response) {
                 setUser(response);
             }
